@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="1fc81be1-ef12-41ab-b9b5-d2046f098e6c" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/../ 学习笔记/第5章 Go语言的依赖管理.md" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../chapter 05/gomodtest/.idea/gomodtest.iml" afterDir="false" />
@@ -13,6 +14,9 @@
       <change afterPath="$PROJECT_DIR$/../chapter 05/gomodtest/gomodtest" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../chapter 05/gomodtest/zaptest.go" afterDir="false" />
     </list>
+=======
+    <list default="true" id="1fc81be1-ef12-41ab-b9b5-d2046f098e6c" name="Default Changelist" comment="" />
+>>>>>>> complete chapter 05
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
