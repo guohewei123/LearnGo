@@ -78,4 +78,4 @@ test true 123
 - float32,float64,complex64,complex128 复数类型,complex64 的实部和虚部都是float32,complex128 实部和虚部都是float64
 
 ### 复数测试（欧拉公式）
-![](image/complex_introduce.png）
+![](./images/complex_introduce.png)
