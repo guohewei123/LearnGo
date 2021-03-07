@@ -237,3 +237,326 @@ func main() {
 0 1 2 3 4
 1 1024 1048576 1073741824 1099511627776 1125899906842624
 ```
+
+## 四、条件语句
+### 1. if 语句
+- if 的条件里不需要括号
+- if 的条件里可以赋值
+- if 的条件里赋值的变量作用域就在这个 if 语句里
+
+```go
+package main
+
+import (
+	"fmt"
+	"io/ioutil"
+)
+
+func readFile1() {
+	const filename = "learnGo/chapter_02/02_branch/abc.txt" // abc.txt = aaaa\nbbbbb\ncccc
+	contents, err := ioutil.ReadFile(filename)
+	if err != nil {
+		fmt.Println(err)
+	}else{
+		fmt.Printf("%s\n", contents)
+	}
+}
+
+func readFile2() {
+	const filename = "learnGo/chapter_02/02_branch/abc.txt" // abc.txt = aaaa\nbbbbb\ncccc
+	if contents, err := ioutil.ReadFile(filename); err != nil {
+		fmt.Println(err)
+	}else {
+		fmt.Printf("%s\n", contents)
+	}
+	//fmt.Println("%s\n", contents)   # contents 是if中定义的变量，出了if后，变量的生命周期结束了
+}
+
+func main() {
+	readFile1()
+	fmt.Println()
+	readFile2()
+}
+```
+输出结果：
+```
+aaaa
+bbbbb
+cccc
+
+aaaa
+bbbbb
+cccc
+```
+
+### 2. switch 语句
+- switch 会自动 break，除非使用fallthrough
+- switch 后可以没有表达式
+
+```go
+package main
+
+import "fmt"
+
+// switch 语句
+func grade(score int) string {
+	g := ""
+	switch {
+	case score < 0 || score > 100:
+		panic(fmt.Sprintf("Wrong score: %d", score))
+	case score < 60:
+		g = "F"
+	case score < 70:
+		g = "D"
+	case score < 80:
+		g = "C"
+	case score < 90:
+		g = "B"
+	case score <= 100:
+		g = "A"
+	}
+	return g
+}
+
+func main() {
+	fmt.Println(grade(30))
+    fmt.Println(grade(60))
+    fmt.Println(grade(70))
+    fmt.Println(grade(80))
+    fmt.Println(grade(90))
+    fmt.Println(grade(100))
+    //fmt.Println(grade(-1))
+    //fmt.Println(grade(101))
+}
+```
+输出结果：
+```
+F
+D
+C
+B
+A
+A
+```
+
+## 五、循环语句
+### 1. for 语句
+- for的条件里不需要括号
+- for的条件里可以省略初始条件,结束条件,递增表达式
+- for省略初始条件,相当于while
+- for省略初始条件和递增条件,相当于while
+- for 初始条件,结束条件,递增表达式都不加就是死循环
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"time"
+)
+
+// for 省略初始条件,相当于while
+func convertTOBin(n int) string {
+	inputN := n
+	res := ""
+	for ; n >0; n /= 2 {
+		lsb := n % 2
+		res = strconv.Itoa(lsb) + res
+	}
+	fmt.Printf("Int: %10d, Bin: %s\n", inputN, res)
+	return res
+}
+
+// for 省略初始条件和递增条件
+func printFile(filename string) {
+	file, err := os.Open(filename)
+	if err != nil {
+		panic(err)
+	}
+	scanner := bufio.NewScanner(file)
+	for ; scanner.Scan(); {
+		fmt.Println(scanner.Text())
+	}
+}
+
+//3.初始条件,结束条件,递增表达式都不加就是死循环
+func forever() string {
+	for {
+		fmt.Println("Forever loop")
+		time.Sleep(1 * time.Second)
+	}
+}
+
+func main() {
+	convertTOBin(5)
+	convertTOBin(9)
+	convertTOBin(13)
+	convertTOBin(32)
+	convertTOBin(34534)
+	fmt.Println()
+	const filename = "learnGo/chapter_02/02_branch/abc.txt" // abc.txt = aaaa\nbbbbb\ncccc
+	printFile(filename)
+	fmt.Println()
+	forever()
+}
+
+```
+输出结果：
+```
+Int:          5, Bin: 101
+Int:          9, Bin: 1001
+Int:         13, Bin: 1101
+Int:         32, Bin: 100000
+Int:      34534, Bin: 1000011011100110
+
+aaaa
+bbbbb
+cccc
+
+Forever loop
+Forever loop
+Forever loop
+
+```
+
+## 六、函数
+
+- 函数定义 `func eval(a, b int, op string) int {}`
+- 返回值类型写在最后面
+- 可返回多个值
+- 函数可作为参数
+- 没有默认参数、可选参数
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+	"reflect"
+	"runtime"
+)
+
+// 函数定义，可以返回多个值
+func eval(a, b int, op string) (int, error) {
+	res := 0
+	switch op {
+	case "+":
+		res = a + b
+	case "-":
+		res = a - b
+	case "*":
+		res = a * b
+	case "/":
+		//res = a / b
+		res, _ = div(a, b)
+	default:
+		//return res, fmt.Errorf("unsupport operation: %s", op)
+	}
+	return res, nil
+}
+
+// 7 / 4 = 1 ... 3
+// 输出起名字
+func div(a, b int) (q, r int) {
+	//q = a / b
+	//r = a % b
+	//fmt.Printf("%d / %d = %d ... %d\n", a, b, q, r)
+	//return
+	return a / b, a % b
+}
+
+// 函数的参数可以是函数
+func apply(op func(int, int) int, a, b int) int {
+	p := reflect.ValueOf(op).Pointer()
+	opName := runtime.FuncForPC(p).Name()
+	fmt.Printf("Calling function: %s with args: (%d, %d)\n", opName, a, b)
+	return op(a, b)
+}
+
+// 定义pow函数
+func pow(a, b int) int {
+	return int(math.Pow(float64(a), float64(b)))
+}
+
+// 可变参数列表
+func sum(numbers ...int) int {
+	sum := 0
+	for i:=range numbers {
+		sum += numbers[i]
+	}
+	return sum
+}
+
+func main() {
+	if res, err := eval(4, 3, "-"); err != nil {
+		fmt.Printf("Error: %s\n", err)
+		panic(err)
+	} else {
+		fmt.Println(res)
+	}
+
+	q, r := div(10, 3)
+	fmt.Printf("10 / 3 = %d ... %d\n", q, r)
+
+	fmt.Println(apply(pow, 3, 4))
+
+	fmt.Println(apply(
+		func(a int, b int) int {
+			return int(math.Pow(float64(a), float64(b)))
+		}, 3, 4))
+
+	fmt.Println(sum(1, 2, 3, 4, 5))
+}
+```
+输出结果：
+```
+1
+10 / 3 = 3 ... 1
+Calling function: main.pow with args: (3, 4)
+81
+Calling function: main.main.func1 with args: (3, 4)
+81
+15
+
+```
+## 七、指针
+- Go语言指针不能运算
+- Go 语言只有值传递一种方式
+### 1. 参数传递
+![参数传递](images/cd6a0b84.png)
+### 2. 拷贝一份a的地址，使用指针传递相当于引用传递的效果
+![](images/697f433d.png)
+### 3. Go语言中Object类型的名字叫Cache
+![](images/0e837c28.png)
+
+```go
+package main
+
+import "fmt"
+
+// 通过指针来交换值
+func swap1(a, b *int) {
+	*a, *b = *b, *a
+}
+
+func swap2(a, b int) (int, int) {
+	return b, a
+}
+
+func main() {
+	a, b := 3, 4
+	swap1(&a, &b)
+	fmt.Println(a, b)
+	a, b = 3, 4
+	a, b = swap2(a, b)
+	fmt.Println(a, b)
+}
+```
+输出结果：
+```
+4 3
+4 3
+```
+

@@ -1,8 +1,8 @@
 # Google资深工程师深度讲解Go语言
 
-基本语法、函数式编程、面向接口、并发编程、分布式爬虫实战 全面掌握Go语言
-学习笔记链接：https://gitee.com/laosuaidami/learnGo
-学习视频：https://coding.imooc.com/class/180.html
+- 基本语法、函数式编程、面向接口、并发编程、分布式爬虫实战 全面掌握Go语言
+- 学习笔记链接：https://gitee.com/laosuaidami/learnGo
+- 学习视频：https://coding.imooc.com/class/180.html
 
 ## 课程目录：
 ### 第1章 课程介绍
