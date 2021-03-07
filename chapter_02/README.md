@@ -71,13 +71,169 @@ func main() {
 test true 123
 ```
 
-## 一、内建变量类型
+## 二、内建变量类型
 -  bool string
 - (u)int (u)int8 (u)int16,   (u)int32,(u)int64, uintptr 指针  加u无符号证书,不加u有符号整数,根据操作系统分,规定长度,不规定长度
 - byte rune 字符型,go语言的char类型,byte 8位,rune 32位
 - float32,float64,complex64,complex128 复数类型,complex64 的实部和虚部都是float32,complex128 实部和虚部都是float64
 
-### 复数测试（欧拉公式）
-![](images/0224f8c5.png)
-![](images/01f7542f.png)
-![](images/2ce7190b.png)
+### 1. 复数测试（欧拉公式）
+![](images/00799acf.png)
+
+![](images/9272bad0.png)     
+
+![](images/2326bb99.png)
+
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+	"math/cmplx"
+)
+
+func euler() {
+	c := 3 + 4i
+	fmt.Println(cmplx.Abs(c))
+	fmt.Println(cmplx.Pow(math.E, 1i * math.Pi) + 1)
+	fmt.Println(cmplx.Exp(1i * math.Pi) + 1)
+	fmt.Printf("%.3f\n", cmplx.Exp(1i * math.Pi) + 1)
+}
+
+func main() {
+	euler()
+}
+```
+
+输出结果：
+```
+5
+(0+1.2246467991473515e-16i)
+(0+1.2246467991473515e-16i)
+(0.000+0.000i)
+```
+### 2. 类型转换是强制的,没有隐士类型转换
+
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+	"math/cmplx"
+)
+
+// 类型转换
+func triangle() {
+	a, b := 3, 4
+	var c int
+	c = int(math.Sqrt(float64(a*a + b*b)))
+	fmt.Println(c)
+}
+
+func main() {
+	triangle()
+}
+```
+
+输出：
+```
+5
+```
+
+#### 变量定义要点回顾
+- 变量类型写在变量名之后
+- 编译器可推测变量类型
+- 没有 char，只有 rune
+- 原生支持复数类型
+
+## 三、常量定义
+
+### 1. 常量的定义
+- const filename = “abc.txt”
+- const 数值可作为各种类型使用
+- const a,b = 3,4
+- var c = int(math.Sqrt(a*a + b*b)) // a,b 未指定类型无需转换为 float
+
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+	"math/cmplx"
+)
+
+// 常量定义
+func consts() {
+	const filename = "abc.txt"
+	const (
+		a, b = 3, 4
+		name = "lao wang"
+	)
+	c := math.Sqrt(a*a + b*b)
+	fmt.Println(filename, c, name)
+}
+
+func main() {
+	consts()
+}
+```
+输出：
+```
+abc.txt 5 lao wang
+```
+
+### 2. 使用常量定义枚举类型
+- 普通枚举类型
+- 自增值枚举类型
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+	"math/cmplx"
+)
+
+func enums() {
+	//普通枚举类型
+	/*const(
+		cpp = 0
+		java = 1
+		python = 2
+		golang = 3
+		javascript = 4
+	)*/
+	//自增值枚举类型
+	const(
+		cpp = iota
+		java
+		python
+		golang
+		javascript
+	)
+	fmt.Println(cpp, java, python, golang, javascript)
+
+	// b, kb, mb, gb, tb, pb
+	const(
+		b = 1 << (10 * iota)
+		kb
+		mb
+		gb
+		tb
+		pb
+	)
+	fmt.Println(b, kb, mb, gb, tb, pb)
+}
+
+func main() {
+	enums()
+}
+```
+输出：
+```
+0 1 2 3 4
+1 1024 1048576 1073741824 1099511627776 1125899906842624
+```
