@@ -115,7 +115,7 @@ Traversal (_, val)
 ```
 ## 二、切片 Slice
 - Slice本身没有数据，是对底层 array 的一个 view
-    ![](images/6c559fdd.png)
+![](images/6c559fdd.png)
 - 切片的定义方法
     ```go
     // 方法一： 通过对数组的切片获取
