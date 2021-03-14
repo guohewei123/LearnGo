@@ -16,7 +16,7 @@
 ### 3. 闭包
 ![](images/b57da0e5.png)
 
-- Go 语言闭包实现 adder
+#### Go 语言闭包实现 adder
 ```go
 package main
 
@@ -83,16 +83,14 @@ func main() {
 */
 ```
 
-- python 中的闭包实现
+#### python 中的闭包实现
+![](images/d931da65.png) 
 
-    ![](images/d931da65.png) 
-
-- c++ 中的闭包
-
-    ![](images/59652da1.png)
+#### c++ 中的闭包
+![](images/59652da1.png)
     
-- Java 中的闭包
-    ![](images/6c779af4.png)
+#### Java 中的闭包
+![](images/6c779af4.png)
 
 
 ## 二、 使用闭包实现斐波那契数列
