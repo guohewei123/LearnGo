@@ -16,7 +16,7 @@
 ### 3. 闭包
 ![](images/b57da0e5.png)
 
-#### Go 语言闭包实现 adder
+### 4. Go 语言闭包实现 adder
 ```go
 package main
 
@@ -83,13 +83,13 @@ func main() {
 */
 ```
 
-#### python 中的闭包实现
+### 5. python 中的闭包实现
 ![](images/d931da65.png) 
 
-#### c++ 中的闭包
+### 6. c++ 中的闭包
 ![](images/59652da1.png)
     
-#### Java 中的闭包
+### 7. Java 中的闭包
 ![](images/6c779af4.png)
 
 
