@@ -9,7 +9,7 @@
 - Lock/Unlock
 - PrintHeader/PrintFooter
 
-## 2. 错误处理
+## 2. 错误处理一
 ![](images/1658cfad.png)
 
 ### 2.1 自定义 error 详见以下代码
@@ -70,3 +70,66 @@ func main() {
 }
 
 ```
+
+## 3. 错误处理二 （http web 统一错误处理）
+### 3.1 详见代码 chapter_08/03_error_handler
+
+## 4. panic 和 recover 
+![](images/0161f755.png)
+### 4.1 panic
+- panic 停止当前函数执行
+- 一直向上返回，执行每一层的defer
+- 如果没有遇到recover，程序退出
+### 4.2 recover
+- 仅在defer调用中使用
+- 获取panic的值
+- 如果无法处理，可重新panic
+- 测试代码如下
+    ```go
+    package main
+    
+    import (
+    	"fmt"
+    )
+    
+    func tryRecover() {
+    	defer func() {
+    		r := recover()
+    		if err, ok := r.(error); ok {
+    			fmt.Printf("Error occured: %s\n", err.Error())
+    		} else {
+    			panic(fmt.Sprintf("I don't know what to do: %v", r))
+    		}
+    	}()
+    
+    	// 测试一 输出: Error occured: this is a error
+    	//panic(errors.New("this is a error"))
+    	
+    	// 测试二 输出: Error occured: runtime error: integer divide by zero
+    	/*a := 0
+    	b := 1/a
+    	fmt.Println(b)*/
+    
+    	/* 测试 三 输出:
+    	panic: 123 [recovered]
+    	        panic: I don't know what to do: 123
+    	*/
+    	panic(123)
+    }
+    
+    func main() {
+    	tryRecover()
+    }
+    ```
+
+ ## 5. 错误处理综合示例
+ 
+ ### 5.1 error vs panic
+ - 意料之中的：使用error。如：文件打不开
+ - 意料之外的：使用panic。如：数组越界
+ 
+ ### 5.2 错误处理综合示例
+ - defer + panic + recover
+ - Type Assertion
+ - 函数式编程的应用
+ - 综合示例代码见 chapter_08/05_prefect_application
