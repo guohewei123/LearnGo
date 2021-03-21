@@ -14,7 +14,7 @@ func main() {
 	//获取程序运行的操作系统平台下 int 类型所占的位数，如：strconv.IntSize。
 	fmt.Println(strconv.IntSize) // 64
 
-	fmt.Println("------------------ 1. 将字符串转换为 int 型 -----------------------")
+	fmt.Println("------------------ 1. 将字符串转换为 int 型 Atoi -----------------------")
 	var s string = "100"
 	res, err := strconv.Atoi(s)
 	if err != nil {
@@ -23,7 +23,7 @@ func main() {
 		fmt.Println(res) // 100
 	}
 
-	fmt.Println("------------------ 2. 将字符串转换为 float64 型 -----------------------")
+	fmt.Println("------------------ 2. 将字符串转换为 float64 型 ParseFloat Itoa -----------------------")
 	var str01 string = "100.55"
 	float01, err := strconv.ParseFloat(str01, 64)
 	if err != nil {
@@ -34,7 +34,7 @@ func main() {
 	str02 := strconv.Itoa(99)           // "99"
 	fmt.Printf("int 转字符: %s \n", str02) // int 转字符: 99
 
-	fmt.Println("------------------ 3. 字符串比较 -----------------------")
+	fmt.Println("------------------ 3. 字符串比较 Compare -----------------------")
 	//com01 := strings.Compare(str01, str02)
 	com01 := strings.Compare(str02, str02)
 	if com01 == 0 {
@@ -44,12 +44,12 @@ func main() {
 
 	}
 
-	fmt.Println("------------------ 4. 包含 -----------------------")
+	fmt.Println("------------------ 4. 包含 Contains -----------------------")
 	str01 = "hello world"
 	isCon := strings.Contains(str01, "hello")
 	fmt.Println(isCon) // true
 
-	fmt.Println("------------------ 5. 查找位置 -----------------------")
+	fmt.Println("------------------ 5. 查找位置 Index LastIndex -----------------------")
 	str01 = "hello, world"
 	theIndex := strings.Index(str01, ",")
 	fmt.Println(theIndex)                     // 5
@@ -57,16 +57,16 @@ func main() {
 	lastIndex := strings.LastIndex(str01, "o")
 	fmt.Println("在字符串中最后出现位置的索引 ", strconv.Itoa(lastIndex)) // 在字符串中最后出现位置的索引  8
 
-	fmt.Println("------------------ 6. 统计给定子串sep的出现次数 -----------------------")
+	fmt.Println("------------------ 6. 统计给定子串sep的出现次数 Count -----------------------")
 	//统计给定子串sep的出现次数, sep为空时, 返回: 1 + 字符串的长度
 	fmt.Println(strings.Count("cheeseeee", "ee")) // 3
 	fmt.Println(strings.Count("five", ""))        // 5  sep为空时, 返回 len("five") + 1
 
-	fmt.Println("------------------ 7. 重复s字符串count次 -----------------------")
+	fmt.Println("------------------ 7. 重复s字符串count次 Repeat -----------------------")
 	// 重复s字符串count次, 最后返回新生成的重复的字符串
 	fmt.Println("hello " + strings.Repeat("world ", 5)) // hello world world world world world
 
-	fmt.Println("------------------ 8. 在s字符串中, 把old字符串替换为new字符串 -----------------------")
+	fmt.Println("------------------ 8. 在s字符串中, 把old字符串替换为new字符串 Replace -----------------------")
 	// 在s字符串中, 把old字符串替换为new字符串，n表示替换的次数，小于0表示全部替换
 	var str03 string = "/Users//Documents/GOPatch/src/MyGO/config/TestString/"
 	str04 := strings.Replace(str03, "/", "**", -1)
@@ -75,7 +75,7 @@ func main() {
 	fmt.Println(str05) // **Users****Documents**GOPatch/src/MyGO/config/TestString/
 
 	fmt.Println("删除字符串的开头和尾部")
-	fmt.Println("------------------ 9. 删除字符串的开头和尾部 -----------------------")
+	fmt.Println("------------------ 9. 删除字符串的开头和尾部 Trim -----------------------")
 	str03 = "/Users/Documents/GOPatch/src/TestString/"
 	fmt.Println("删除两头的 / = " + strings.Trim(str03, "/"))       // 删除两头的 / = Users/Documents/GOPatch/src/TestString
 	fmt.Println("删除左边的 / = " + strings.TrimLeft(str03, "/"))   // 删除左边的 / =  Users/Documents/GOPatch/src/TestString/
@@ -83,16 +83,16 @@ func main() {
 	str06 := strings.TrimSpace(" hello hao hao hao ")
 	fmt.Printf("删除开头末尾的空格:%s已删除\n", str06) // 删除开头末尾的空格:hello hao hao hao已删除
 
-	fmt.Println("------------------ 10. 大小写 -----------------------")
+	fmt.Println("------------------ 10. 大小写 Title ToLower ToUpper -----------------------")
 	fmt.Println(strings.Title("hello hao hao hao"))   // Hello Hao Hao Hao
 	fmt.Println(strings.ToLower("Hello Hao Hao Hao")) // hello hao hao hao
 	fmt.Println(strings.ToUpper("hello hao hao hao")) // HELLO HAO HAO HAO
 
-	fmt.Println("------------------ 11. 前缀 后缀 -----------------------")
+	fmt.Println("------------------ 11. 前缀 后缀 HasPrefix HasSuffix -----------------------")
 	fmt.Println(strings.HasPrefix("Gopher", "Go")) // true
 	fmt.Println(strings.HasSuffix("Amigo", "go"))  // true
 
-	fmt.Println("------------------ 12. 字符串分割 -----------------------")
+	fmt.Println("------------------ 12. 字符串分割 Fields Split -----------------------")
 	fieldsStr := "  hello   it's  a  nice day today    "
 	//根据空白符分割,不限定中间间隔几个空白符
 	fieldsSlice := strings.Fields(fieldsStr)
@@ -127,7 +127,7 @@ func main() {
 	下标 5 对应值 = y
 	下标 6 对应值 =  */
 
-	fmt.Println("------------------ 13. 字符串拼接 -----------------------")
+	fmt.Println("------------------ 13. 字符串拼接 Join -----------------------")
 	//Join 用于将元素类型为 string 的 slice, 使用分割符号来拼接组成一个字符串：
 	fieldsSlice = []string{"hello", "it's", "a", "nice", "day", "today"}
 	var str08 string = strings.Join(fieldsSlice, ",")

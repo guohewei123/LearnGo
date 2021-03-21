@@ -127,6 +127,7 @@ func main() {
  ### 5.1 error vs panic
  - 意料之中的：使用error。如：文件打不开
  - 意料之外的：使用panic。如：数组越界
+ - 总结：panic 会导致栈被展开直到 defer 修饰的 recover() 被调用或者程序中止。
  
  ### 5.2 错误处理综合示例
  - defer + panic + recover
