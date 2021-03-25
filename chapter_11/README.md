@@ -23,6 +23,7 @@
 
 ## 2 使用Channel等待goroutine任务结束
 ### 2.1 通过自定义channel实现等待goroutine任务结束
+- WaitGroup的使用
 - 示例代码详见 chapter_11/02_channel_done/channelDone_1
 
 ### 2.2 通过 sync.WaitGroup实现等待goroutine任务结束
@@ -32,3 +33,12 @@
 - 示例代码详见 chapter_11/03_traverse_with_channel
 
 ## 4 使用 Select 进行调度
+- Select 的使用
+- 定时器的使用
+- 在Select中使用 nil Channel
+- 示例代码详见 chapter_11/04_select_demo
+## 5 传统同步机制
+- WaitGroup
+- Mutex
+  - 示例代码详见 chapter_11/05_mutex_demo
+- Cond
