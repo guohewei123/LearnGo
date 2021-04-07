@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	_ "net/http/pprof"
 	"os"
 	"testHttpServer/handler"
 )
@@ -21,7 +22,7 @@ type appHandler func(response http.ResponseWriter, request *http.Request) error
 // 输出: http 库要求的 handler类型
 func errorHandler(handler appHandler) func(response http.ResponseWriter, request *http.Request) {
 	return func(response http.ResponseWriter, request *http.Request) {
-		defer func() {     // recover 代码运行的错误
+		defer func() { // recover 代码运行的错误
 			if r := recover(); r != nil {
 				log.Printf("Recover panic error: %v", r)
 				http.Error(
@@ -36,7 +37,7 @@ func errorHandler(handler appHandler) func(response http.ResponseWriter, request
 			log.Printf("An error occur: %s", err.Error())
 
 			// user error
-			if err, ok := err.(userError); ok {   // 处理自己返回的错误
+			if err, ok := err.(userError); ok { // 处理自己返回的错误
 				http.Error(response, err.Message(), http.StatusBadRequest)
 				return
 			}
