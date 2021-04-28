@@ -16,14 +16,14 @@ func ParseProfile(contents []byte) engine.ParserResult {
 
 	profile.Marriage = extractString(contents, marriageRe)
 	return engine.ParserResult{
-		Items: []interface{}{profile},
+		//Items: []interface{}{profile},
 	}
 }
 
 func extractString(c []byte, re *regexp.Regexp) string {
+	//return string(re.FindSubmatch(c)[1])
 	match := re.FindSubmatch(c)
-	if match != nil && len(match) > 2 {
-
+	if match != nil && len(match) > 1 {
 		return string(match[1])
 	}
 	return ""

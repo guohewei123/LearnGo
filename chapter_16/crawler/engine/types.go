@@ -9,7 +9,14 @@ type Request struct {
 // 定义解析器返回结果结构体
 type ParserResult struct {
 	Requests []Request
-	Items    []interface{}
+	Items    []Item
+}
+
+type Item struct {
+	Url     string
+	Id      string
+	Type    string
+	Payload interface{}
 }
 
 // 定义一个空的解析器结果

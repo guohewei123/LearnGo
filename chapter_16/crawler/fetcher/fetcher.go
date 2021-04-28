@@ -14,8 +14,7 @@ import (
 )
 
 // 获取数据 出入url 输出结果
-//var rateLimiter = time.Tick(1000 * time.Millisecond)
-var rateLimiter = time.Tick(time.Millisecond * 100)
+var rateLimiter = time.Tick(30 * time.Millisecond)
 func Fetch(url string) ([]byte, error) {
 	<- rateLimiter
 	req, err := http.NewRequest(http.MethodGet, url, nil)

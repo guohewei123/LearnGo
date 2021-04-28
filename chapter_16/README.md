@@ -109,3 +109,6 @@ Fetch操作结束后，Parse会交给Engine新的Request，Engine将Request放�
 - 计算MD5等哈希，再存哈希表
 - 使用bloom filter 多重哈希结果
 - 使用Redis等key-value存储系统实现分布式去重
+
+![](images/8a62f057.png)
+

@@ -1,13 +1,9 @@
 package engine
 
-import (
-	"crawler/model"
-	"log"
-)
-
 type ConcurrentEngine struct {
-	Scheduler Scheduler
+	Scheduler   Scheduler
 	WorkerCount int
+	ItemChan    chan Item
 }
 
 type Scheduler interface {
@@ -25,7 +21,7 @@ func (e *ConcurrentEngine) Run(seeds ...Request) {
 	out := make(chan ParserResult)
 	e.Scheduler.Run()
 
-	for i :=0; i <e.WorkerCount; i++ {
+	for i := 0; i < e.WorkerCount; i++ {
 		createWorker(e.Scheduler.WorkerChan(), out, e.Scheduler)
 	}
 
@@ -37,14 +33,17 @@ func (e *ConcurrentEngine) Run(seeds ...Request) {
 		e.Scheduler.Submit(r)
 	}
 
-	profileCount := 0
 	for true {
-		result := <- out
+		result := <-out
 		for _, item := range result.Items {
-			if _, ok := item.(model.Profile); ok {
-				log.Printf("Got profile #%d: %v", profileCount, item)
-				profileCount++
-			}
+			//log.Printf("------Item Saver: got item %v", item)
+			temp := item
+			go func() {
+				e.ItemChan <- temp
+			}()
+			//if _, ok := item.(model.Profile); ok {
+			//
+			//}
 		}
 		// URL dedup 去重
 		for _, request := range result.Requests {
@@ -61,7 +60,7 @@ func createWorker(in chan Request, out chan ParserResult, ready ReadyNotifier) {
 	go func() {
 		for true {
 			ready.WorkerReady(in)
-			request := <- in
+			request := <-in
 			result, err := worker(request)
 			if err != nil {
 				continue
@@ -72,6 +71,7 @@ func createWorker(in chan Request, out chan ParserResult, ready ReadyNotifier) {
 }
 
 var visitedUrls = make(map[string]bool)
+
 func isDuplicate(r string) bool {
 	if visitedUrls[r] {
 		return true

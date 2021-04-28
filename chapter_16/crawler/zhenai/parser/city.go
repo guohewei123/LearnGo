@@ -12,6 +12,8 @@ var ProfileRe = regexp.MustCompile(
 	`<table><tbody><tr><th><a href="(http://album.zhenai.com/u/[0-9]+)"[^>]+>([^<]+)</a></th></tr> <tr><td[^>]+><span[^>]+>性别：</span>([^<]+)</td> <td><span[^>]+>居住地：</span>([^<]+)</td></tr> <tr><td[^>]+><span[^>]+>年龄：</span>([^<]+)</td>  <td><span class="grayL">[^<]+</span>([^<]+)</td></tr> <tr><td[^>]+><span[^>]+>婚况：</span>([^<]+)</td> <td[^>]+><span[^>]+>身   高：</span>([^<]+)</td></tr></tbody></table>`)
 var cityUrlRe = regexp.MustCompile(`href="(http://www.zhenai.com/zhenghun/[^"]+)"`)
 
+var idUrlRe = regexp.MustCompile(`http://album.zhenai.com/u/([0-9]+)`)
+
 func ParseCity(contents []byte) engine.ParserResult {
 
 	matches := ProfileRe.FindAllSubmatch(contents, -1)
@@ -31,7 +33,14 @@ func ParseCity(contents []byte) engine.ParserResult {
 		if err == nil {
 			profile.Height = height
 		}
-		result.Items = append(result.Items, profile)
+		itemProfile := engine.Item{
+			Url: string(match[1]),
+			//Id:      string(idUrlRe.FindSubmatch(match[1])[1]),
+			Id:      extractString(match[1], idUrlRe),
+			Type:    "zhenai",
+			Payload: profile,
+		}
+		result.Items = append(result.Items, itemProfile)
 		//result.Requests = append(result.Requests, engine.Request{
 		//	Url:        strings.Replace(string(match[1]), `\u002F`, "/", -1),
 		//	ParserFunc: engine.NilParser,
