@@ -14,6 +14,7 @@
 - go也有defer/panic/recover 模式
 ### 3. 泛型
 - 泛型作为模板类型
+  
   ![](images/1b8fb775.png)
   
   - 这种泛型实际想实现duck typing
