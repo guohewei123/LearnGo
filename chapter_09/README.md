@@ -42,6 +42,8 @@ for _, tt := range tests {
 - 测试函数名要以 Test 开头, 如：`unc TestErrWrapper(t *testing.T) {}`
 - 在命令行通过 `go test .` 执行测试文件
 - 详细测试代码见 chapter_09/01_tryTest
+- 解决Go test执行单个测试文件提示未定义问题：https://www.cnblogs.com/Detector/p/10010292.html
+- 指定调用的测试函数 `go test -v -run TestRandomBalance `
 
 ## 2 查看代码测试覆盖率
 ```shell script
