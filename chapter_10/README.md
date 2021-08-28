@@ -28,7 +28,7 @@
 
 
 ### 1.4 go routine 可能的切换点
-- I/0, guohewei
+- I/0, select
 - channel
 - 等待锁
 - 函数调用（有时）
