@@ -211,3 +211,8 @@ Channel是Goroutine之间通信的桥梁，它和函数一样是一等公民。�
 
 - 19-1 体会Go语言的设计
 - 19-2 课程总结
+
+### 第20章 断言assertion和反射reflect
+**学习笔记：https://gitee.com/laosuaidami/learnGo/tree/master/chapter_20**
+- 20-1 断言assertion使用
+- 20-2 反射reflect使用
