@@ -57,6 +57,13 @@
         checkInputEg(base)
     }
 ```
+输出
+```shell script
+Cat name: 凯特 
+v.(Dog).name= 大卫
+v.(Animal).classify= 爬行动物
+```
+
 ## 20-2 反射reflect使用
 通过反射可以知道数据的原始类型，数据内容，方法等，并可以进行一定的操作
 ### 常用操作：
