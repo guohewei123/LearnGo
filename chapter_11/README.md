@@ -42,3 +42,35 @@
 - Mutex
   - 示例代码详见 chapter_11/05_mutex_demo
 - Cond
+
+## 6 sync包的使用
+- Mutex   互斥锁 
+  1.  Lock()  
+  2.  UnLock()
+- RWMutex 读写互斥锁 
+  1. Lock()      写的时候，排斥其他的写锁和读锁
+  2. UnLock()    释放写锁
+  3. Rlock()     在读取的时候 不会阻塞其他的读锁，但是会排斥写锁 Lock()
+  4. RUnlock()   释放读锁
+- Once    Once.Do(一个函数) 这个方法无论被调用多少次，只会执行一次
+- WaitGroup  
+    1. Add(delta int) 设定需要Done多少次
+    2. Done() 没执行一次加1
+    3. Wait() 阻塞到 执行Done() 的次数 和 Add(delta int)的delta次数相同
+    示例代码详见 chapter_11/02_channel_done/channelWaitGroup_2
+- Map 一个并发字典, 可并发读写
+    1. Store(key, val)              写入字典中数据
+    2. Load(key)                    读取字段中数据
+    3. LoadOrStore(key, defaultVal) 读不到设置key默认值defaultVal
+    4. Range(func(key, value interface{}) bool {})  
+                                    传入一个函数，遍历字典（函数每返回true, 开始遍历下一个元素，返回false终止遍历）                     
+    5. Delete(key)                  删除字典中key
+- Pool 并发池  通过Put 将数据丢到Pool中，然后Get() 但是没有顺序，可以用完再丢回去
+    1. Put
+    2. Get
+- Cond 通知锁
+    1. NewCond(lock)    创建一个Cond
+    2. cond.L.Lock() ~ cond.L.Unlock()  创建一个锁区间 在区域内部可以cond.Wait()
+    3. cond.Wait()      在锁区间内部可以cond.Wait()
+    4. cond.Broadcast() 全部释放cond.Wait()
+    5. cond.Signal()    解锁一个cond.Wait()
