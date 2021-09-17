@@ -221,3 +221,10 @@ Channel是Goroutine之间通信的桥梁，它和函数一样是一等公民。�
 
 ### 第21章 context包试用
 **学习笔记：https://gitee.com/laosuaidami/learnGo/tree/master/chapter_21** 
+
+### 第22章 Go 中 io 包的使用方法
+**学习笔记：https://gitee.com/laosuaidami/learnGo/tree/master/chapter_22**
+- 22-1 io包的基础使用
+
+### 第23章 Go 中文件的操作
+**学习笔记：https://gitee.com/laosuaidami/learnGo/tree/master/chapter_23**
