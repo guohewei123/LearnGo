@@ -11,7 +11,7 @@ import (
 */
 
 func OpenFileReadUsage() {
-	f, err := os.OpenFile("./learnGo/chapter_23/01_os_pkg_usage/test.txt", os.O_CREATE|os.O_RDWR, 0777)
+	f, err := os.OpenFile("./learnGo/chapter_23/01_file_write_usage/test1.txt", os.O_CREATE|os.O_RDWR, 0777)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -37,7 +37,7 @@ func OpenFileReadUsage() {
 */
 
 func OpenFileWriteUsage() {
-	f, err := os.OpenFile("./learnGo/chapter_23/01_os_pkg_usage/test.txt", os.O_CREATE|os.O_RDWR, 0777)
+	f, err := os.OpenFile("./learnGo/chapter_23/01_file_write_usage/test1.txt", os.O_CREATE|os.O_RDWR, 0777)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -62,7 +62,7 @@ func OpenFileWriteUsage() {
 */
 
 func BufioNewReaderUsage() {
-	f, err := os.OpenFile("./learnGo/chapter_23/01_os_pkg_usage/test.txt", os.O_CREATE|os.O_RDWR, 0777)
+	f, err := os.OpenFile("./learnGo/chapter_23/01_file_write_usage/test1.txt", os.O_CREATE|os.O_RDWR, 0777)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -116,7 +116,7 @@ func BufioNewReaderUsage() {
 
 	// ------------ 4. os  ReadFile ---------------------
 	/*
-	all, err := os.ReadFile("./learnGo/chapter_23/01_os_pkg_usage/test.txt")
+	all, err := os.ReadFile("./learnGo/chapter_23/01_file_write_usage/test1.txt")
 	if err != nil {
 		panic(err)
 	}
@@ -167,5 +167,5 @@ func main() {
 	//OpenFileReadUsage()
 	//OpenFileWriteUsage()
 	//BufioNewReaderUsage()
-	//osReadDir()
+	osReadDir()
 }
