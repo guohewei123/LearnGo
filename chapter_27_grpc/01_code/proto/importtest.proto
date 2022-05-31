@@ -1,0 +1,10 @@
+syntax = "proto3";
+package importtest;
+import "google/protobuf/empty.proto";  // import 官方 proto 文件
+import "common.proto";                 // import 本地proto文件
+option go_package = "trip/proto/gen/importtest;importtestpb";
+
+// import 其他proto 文件示例
+service TestImport {
+  rpc SayHello(google.protobuf.Empty) returns (common.Location);
+}

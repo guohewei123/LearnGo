@@ -1,0 +1,5 @@
+2021-09-11T20:24:07.938+0800	INFO	01_zap_log/logger_test.go:26	测试一下啊：111
+2021-09-11T20:24:07.939+0800	DEBUG	01_zap_log/logger_test.go:27	测试一下啊：111
+2021-09-11T20:24:07.939+0800	ERROR	01_zap_log/logger_test.go:28	测试一下啊：111
+2021-09-11T20:24:07.939+0800	WARN	01_zap_log/logger_test.go:29	测试一下啊：111
+2021-09-11T20:24:07.939+0800	INFO	01_zap_log/logger_test.go:30	测试一下啊：111, 1111, collector returned no data, 3333.330000

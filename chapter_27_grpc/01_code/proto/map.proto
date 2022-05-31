@@ -1,0 +1,17 @@
+syntax = "proto3";
+package mapbp;
+option go_package = "trip/proto/gen/map;mapbp";
+
+// map 类型示例
+message MapReq {
+  string               msg      = 1;
+  map <string, string> map_data = 2;
+}
+
+message MapResp {
+  string trace_id = 1;
+}
+
+service Map {
+  rpc MapUsage(MapReq) returns (MapResp);
+}

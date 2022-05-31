@@ -1,10 +1,9 @@
-# 《Google资深工程师深度讲解Go语言》
+# Go语言学习笔记
 
 - 基本语法、函数式编程、面向接口、并发编程、分布式爬虫实战 全面掌握Go语言
 - 学习代码笔记链接：https://gitee.com/laosuaidami/learnGo
 - 学习视频：https://coding.imooc.com/class/180.html
 
-## 课程目录：
 ### 第1章 课程介绍 
 **学习笔记：https://gitee.com/laosuaidami/learnGo/tree/master/chapter_01**
 
@@ -228,3 +227,12 @@ Channel是Goroutine之间通信的桥梁，它和函数一样是一等公民。�
 
 ### 第23章 Go 中文件的操作
 **学习笔记：https://gitee.com/laosuaidami/learnGo/tree/master/chapter_23**
+
+### 第24章 Go fmt 打印
+**学习笔记：https://gitee.com/laosuaidami/learnGo/tree/master/chapter_23**
+
+### 第25章 Go log zap 库使用
+
+### 第26章 Go gorm 访问 mysql 库使用
+
+### 第27章 GRPC 学习

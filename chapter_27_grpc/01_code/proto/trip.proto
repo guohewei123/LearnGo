@@ -1,0 +1,62 @@
+syntax = "proto3";
+package trip;
+option go_package = "trip/proto/gen/trip;trippb";
+
+// 1. protobuf 中所有字段都是可选的 多串，少传 都不会报错
+// 2. 所有字段都是可选的 不填默认就是 零值，所以字段填 零值 和 不填 是等价的
+// 3. 新增字段时，要明确零值是表示什么意思，以便于新老系统正确运行
+
+message Location {
+  double latitude  = 1;
+  double longitude = 2;
+}
+
+// 枚举类型
+enum TripStatus {
+  TS_NOT_SPECIFIED = 0;    // 不传，默认是 0
+  NOT_STARTED      = 1;
+  IN_PROGRESS      = 2;
+  FINISHED         = 3;
+  PAID             = 4;
+}
+
+message Trip {
+  string            start           = 6;
+  string            end             = 2;
+  int32             duration_sec    = 3;
+  Location          end_pos         = 1;         // 复合类型
+  int32             fee_cent        = 4;
+  repeated Location path_locations  = 7;         // 数组类型 repeated 类型
+  Location          start_pos       = 5;
+  TripStatus        status          = 8;         // 枚举类型
+  bool              isPromotionTrip = 9;         // 是否参与优惠，老系统不会传 默认false， 新系统传 true (yes)
+  bool              isFromGuestUser = 10;        // 是否为访客，老系统不会传 默认false， 新系统依据实际情况传
+}
+
+message GetTripRequest {
+  string id = 1;
+}
+
+message GetTripResponse{
+  string id   = 1;
+  Trip   trip = 2;
+}
+
+service TripService {
+  rpc GetTrip (GetTripRequest) returns (GetTripResponse);
+}
+
+// 流模式 示例
+message StreamReqData {
+  string In = 1;
+}
+
+message StreamRespData {
+  string Data = 1;
+}
+
+service StreamService{
+  rpc GetStream (StreamReqData) returns (stream StreamRespData);          // 服务端流模式
+  rpc PutStream (stream StreamReqData) returns (StreamRespData);          // 客户端流模式
+  rpc AllStream (stream StreamReqData) returns (stream StreamRespData);   // 双向流模式
+}

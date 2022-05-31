@@ -1,0 +1,8 @@
+syntax = "proto3";
+package common;
+option go_package = "trip/proto/gen/common;commonpb";
+
+message Location {
+  double latitude  = 1;
+  double longitude = 2;
+}

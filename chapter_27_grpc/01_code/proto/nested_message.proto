@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package nested_message;
+
+option go_package = "trip/proto/gen/nested_message;nested_messagepb";
+
+// 嵌套 message
+message HelloReq {
+  string          msg  = 1;
+  message Result {            // 嵌套 message
+    string name = 1;
+    string url  = 2;
+  }
+  repeated Result data = 2;
+}
+
+message HelloResp {
+  string trace_id = 1;
+}
+
+service Hello {
+  rpc SayHello(HelloReq) returns (HelloResp);
+}
+

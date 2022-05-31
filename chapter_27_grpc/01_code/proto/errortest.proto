@@ -1,0 +1,13 @@
+syntax = "proto3";
+package errortest;
+import "google/protobuf/empty.proto";  // import 官方 proto 文件
+option go_package = "trip/proto/gen/errortest;errortestpb";
+
+message RespData {
+  string trace_id = 1;
+}
+
+// import 其他proto 文件示例
+service ErrorTest {
+  rpc ErrorUsage(google.protobuf.Empty) returns (RespData);
+}

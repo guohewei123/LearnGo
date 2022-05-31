@@ -1,0 +1,18 @@
+syntax = "proto3";
+package timestamp;
+import "google/protobuf/timestamp.proto";
+option go_package = "trip/proto/gen/timestamp;timestamppb";
+
+// timestamp 类型示例
+message TimestampReq {
+  string                    msg      = 1;
+  google.protobuf.Timestamp add_time = 2;
+}
+
+message TimestampResp {
+  string trace_id = 1;
+}
+
+service TimestampEg {
+  rpc AddTime(TimestampReq) returns (TimestampResp);
+}
