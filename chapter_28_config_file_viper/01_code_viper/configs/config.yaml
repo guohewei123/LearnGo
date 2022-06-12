@@ -1,0 +1,5 @@
+---
+name: web
+port: 8888
+mysql:
+  endpoint: "127.168.0.1:3306"
